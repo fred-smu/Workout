@@ -23,11 +23,8 @@ const db = require("../models/");
   });
 
   router.post("/api/workouts", (req,res) => {
-    console.log("XXXX post api/workouts XXXX");
-    console.log("req.body",req.body);
-    console.log("XXXX^^^^^^^XXXX");
-
-    // console.log("res",res);
+     console.log("/api/workouts req.body",req.body);
+     // console.log("res",res);
     db.Workout.create({})
     .then(dbWorkout => res.json(dbWorkout))
     .catch (err => {

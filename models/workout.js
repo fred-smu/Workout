@@ -1,13 +1,5 @@
 
-// both**************************
-// type: "resistance",
-// name: "Bicep Curl",
-// duration: 20,
-// one********************************
-// weight: 100,
-// reps: 10,
-// sets: 4
-// distance: 4
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -15,7 +7,7 @@ const WorkoutSchema = new Schema({
     date: {
         type: Date,
         default: Date.now,
-        required: "String is Required"
+        // required: "String is Required"
     },
     exercises: [{
         type: {
@@ -41,12 +33,25 @@ const WorkoutSchema = new Schema({
         },
         sets: {
             type: Number,
-         },
+        },
         distance: {
             type: Number,
         }
     }]
-});
+},
+    {
+        toJSON: {
+            // include any virtual properties when data is requested
+            virtuals: true
+        }
+    }
+);
+
+// adds a dynamically-created property to schema
+workoutSchema.virtual("totalDuration").get(function () {
+            return total + exercise.duration;
+    }
+);
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
